@@ -1,0 +1,59 @@
+name: Deploy to Firebase Hosting (Production)
+
+on:
+  push:
+    branches:
+      - main            # Triggers automatically on merge to main
+  release:
+    types:
+      - published       # Triggers on formal release creation
+  workflow_dispatch:    # Allows manual trigger via the GitHub UI
+
+# Production-grade permissions (Least Privilege Principle)
+permissions:
+  contents: read        # Needed to checkout code
+  deployments: write    # Needed for Firebase Hosting deployment status
+
+jobs:
+  build_and_deploy:
+    name: Build & Deploy to Firebase
+    runs-on: ubuntu-latest
+    
+    # Prevents concurrent deployments from breaking the live environment
+    concurrency:
+      group: firebase-prod-deploy
+      cancel-in-progress: false
+
+    steps:
+      # 1. Checkout the source code (Updated to v4)
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js environment (Updated to v4)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3. Enable Wireit GitHub Actions Caching
+      - name: Setup Wireit Cache
+        uses: google/wireit@setup-github-actions-caching/v2
+
+      # 4. Install production dependencies strictly
+      - name: Install Dependencies
+        run: npm ci
+
+      # 5. Compile the Catalog assets
+      - name: Build Catalog
+        run: npm run build:catalog
+
+      # 6. Securely Deploy to Firebase Live Channel
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MATERIAL_WEB_CATALOG }}
+          channelId: live
+          projectId: material-web-catalog
+          entryPoint: catalog
