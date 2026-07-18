@@ -34,7 +34,7 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MATERIAL_WEB_CATALOG }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GLACARE_WEBSITE }}
           channelId: live
           projectId: material-web-catalog
           entryPoint: catalog  # Looks for firebase.json inside your /catalog directory
