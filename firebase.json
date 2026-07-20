@@ -1,12 +1,6 @@
 {
   "hosting": {
     "redirects": [
-      {
-        "source": "**",
-        "has": [{"type": "host", "value": "glacare.co"}],
-        "destination": "https://www.glacare.co",
-        "type": 301
-      },
     "public": "public",
     "ignore": [
       "firebase.json",
