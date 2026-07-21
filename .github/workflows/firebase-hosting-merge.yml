@@ -18,7 +18,7 @@ jobs:
   deploy:
     name: Deploy Static Site
     runs-on: ubuntu-latest
-
+    
     # Prevents race conditions from multiple simultaneous merges
     concurrency:
       group: firebase-static-prod
@@ -37,4 +37,3 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GLACARE_WEBSITE }}
           channelId: live
           projectId: glacare-website
-          
