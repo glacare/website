@@ -1,65 +1,36 @@
 {
   "hosting": {
     "public": "public",
-
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-
     "cleanUrls": true,
     "trailingSlash": false,
-
-    "redirects": [
-      {
-        "source": "**",
-        "has": [
-          {
-            "type": "host",
-            "value": "glacare.co"
-          }
-        ],
-        "destination": "https://www.glacare.co",
-        "type": 301
-      }
-    ],
-
     "headers": [
       {
         "source": "/assets/**",
         "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=31536000, immutable"
-          }
+          { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
         ]
       },
       {
         "source": "/site.webmanifest",
         "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=86400"
-          }
+          { "key": "Cache-Control", "value": "public, max-age=86400" }
         ]
       },
       {
         "source": "/index.html",
         "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=0, must-revalidate"
-          }
+          { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
         ]
       },
       {
         "source": "/sitemap.xml",
         "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/xml"
-          }
+          { "key": "Content-Type", "value": "application/xml" }
         ]
       },
       {
@@ -71,7 +42,6 @@
         ]
       }
     ],
-
     "rewrites": []
   }
 }
