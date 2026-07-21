@@ -1,4 +1,4 @@
-name: Glacare Static Site on Firebase Hosting
+name: Deploy Static Site to Firebase Hosting
 
 on:
   push:
@@ -36,6 +36,5 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GLACARE_WEBSITE }}
           channelId: live
-          projectId: material-web-catalog
           projectId: glacare-website
           
