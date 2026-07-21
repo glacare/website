@@ -1,4 +1,4 @@
-name: Deploy Static Site to Firebase Hosting
+name: Glacare Static Site on Firebase Hosting
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
   deploy:
     name: Deploy Static Site
     runs-on: ubuntu-latest
-    
+
     # Prevents race conditions from multiple simultaneous merges
     concurrency:
       group: firebase-static-prod
@@ -36,5 +36,6 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_GLACARE_WEBSITE }}
           channelId: live
+          projectId: material-web-catalog
           projectId: glacare-website
-
+          
